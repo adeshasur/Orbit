@@ -1,104 +1,150 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Zap, Star, Shield } from 'lucide-react';
 
 const Pricing = () => {
   const plans = [
     {
       name: "Starter",
       price: "$29",
-      features: ["Up to 5 Projects", "Basic AI Insights", "Standard Support", "Email Alerts"],
+      desc: "Perfect for small teams and startups",
+      features: [
+        "Up to 5 team members",
+        "10,000 AI requests/month",
+        "Basic analytics dashboard",
+        "Email support",
+        "7-day data retention"
+      ],
       highlight: false
     },
     {
       name: "Pro",
       price: "$99",
-      features: ["Unlimited Projects", "Full AI Analytics", "Priority Support", "Real-time Dashboards", "Advanced Customization"],
+      desc: "For growing businesses that need more",
+      features: [
+        "Unlimited team members",
+        "100,000 AI requests/month",
+        "Advanced analytics & reports",
+        "Priority support (24/7)",
+        "90-day data retention",
+        "Custom integrations",
+        "API access"
+      ],
       highlight: true
     },
     {
       name: "Enterprise",
       price: "Custom",
-      features: ["SSO & Security", "Custom AI Models", "Dedicated Manager", "Self-hosted Options", "Tailored Reporting"],
+      desc: "For organizations with advanced needs",
+      features: [
+        "Everything in Pro",
+        "Unlimited AI requests",
+        "Custom AI model training",
+        "Dedicated account manager",
+        "SSO & advanced security",
+        "99.99% SLA guarantee",
+        "Self-hosted option"
+      ],
       highlight: false
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.15 } 
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
-
   return (
-    <section id="pricing" className="py-24 px-6 relative overflow-hidden bg-orbitDark">
-      {/* Background glow for Pricing section */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orbitAccent/5 rounded-full blur-[140px] pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto text-center">
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Choose Your Plan</h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto text-center leading-relaxed">
-            Scalable plans for teams of any size. Upgrade at any time and get more powerful AI at your fingertips.
-          </p>
-        </div>
-
-        {/* Pricing Table Cards */}
+    <section id="pricing" className="py-24 px-6 relative bg-orbitDark overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="text-center mb-20"
         >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-6 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+            <Star size={12} className="text-purple-400" />
+            Pricing Plans
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">
+            Simple, Transparent <span className="bg-gradient-to-r from-purple-400 to-orbitAccent bg-clip-text text-transparent">Pricing</span>
+          </h2>
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            Choose the perfect plan for your scale. Start for free, upgrade when you need to.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
           {plans.map((p, i) => (
             <motion.div 
               key={i}
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
-              className={`p-10 rounded-3xl flex flex-col items-center gap-6 relative transition-all duration-300 ${
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              whileHover={{ y: -8 }}
+              className={`group relative rounded-[2rem] p-8 md:p-10 transition-all duration-300 w-full ${
                 p.highlight 
-                ? 'bg-orbitDark border-orbitAccent/50 border-2 scale-105 shadow-[0_0_60px_rgba(59,130,246,0.25)] z-10' 
-                : 'bg-white/5 border border-white/10 hover:bg-white/[0.08]'
+                ? 'bg-gradient-to-b from-[#161d30] to-[#111626] border border-orbitAccent/50 shadow-[0_0_40px_-10px_rgba(59,130,246,0.3)] md:scale-105 z-10' 
+                : 'bg-[#111622]/80 backdrop-blur-sm border border-white/[0.05] hover:border-white/10 opacity-90 hover:opacity-100 shadow-xl'
               }`}
             >
+              {/* Optional glowing top border for highlight */}
               {p.highlight && (
-                <div className="absolute top-0 right-10 -translate-y-1/2 bg-orbitAccent text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
-                  Most Popular
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-[2px] bg-gradient-to-r from-transparent via-orbitAccent to-transparent"></div>
+              )}
+
+              {p.highlight && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orbitAccent to-purple-600 text-white text-[10px] uppercase tracking-widest font-bold px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg shadow-orbitAccent/20">
+                  <Zap size={12} fill="currentColor" /> Most Popular
                 </div>
               )}
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-white mb-2">{p.name}</h3>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl md:text-5xl font-black text-white">{p.price}</span>
-                  {p.price !== 'Custom' && <span className="text-gray-400 text-lg">/mo</span>}
-                </div>
+              
+              <div className="mb-8">
+                <h3 className={`text-xl font-bold mb-3 ${p.highlight ? 'text-white' : 'text-gray-200'}`}>{p.name}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{p.desc}</p>
               </div>
-              <ul className="w-full space-y-4 my-6 text-left border-t border-white/10 pt-8 flex-grow">
+              
+              <div className="mb-8 pb-8 border-b border-white/10 relative">
+                <div className="flex items-baseline gap-1">
+                  <span className={`text-5xl font-black ${p.highlight ? 'text-white' : 'text-gray-200'}`}>{p.price}</span>
+                  {p.price !== 'Custom' && <span className="text-gray-500 font-medium tracking-wide">/ mo</span>}
+                </div>
+                {p.highlight && <div className="absolute bottom-[-1px] left-0 w-1/3 h-[1px] bg-gradient-to-r from-orbitAccent to-transparent"></div>}
+              </div>
+              
+              <ul className="space-y-4 mb-10">
                 {p.features.map((f, idx) => (
-                  <li key={idx} className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-orbitAccent flex-shrink-0" />
-                    <span>{f}</span>
+                  <li key={idx} className="flex items-start gap-3">
+                    <div className={`mt-0.5 rounded-full p-0.5 ${p.highlight ? 'bg-orbitAccent/20 text-orbitAccent' : 'bg-white/5 text-gray-400 group-hover:bg-white/10 group-hover:text-gray-300 transition-colors'}`}>
+                      <Check size={14} strokeWidth={3} />
+                    </div>
+                    <span className={`text-sm ${p.highlight ? 'text-gray-200' : 'text-gray-400'} font-medium`}>{f}</span>
                   </li>
                 ))}
               </ul>
-              <button 
-                className={`w-full py-4 rounded-xl font-bold transition-all ${
-                  p.highlight 
-                  ? 'bg-orbitAccent text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.6)]' 
-                  : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
-              >
-                Choose {p.name}
+              
+              <button className={`w-full py-4 rounded-2xl font-bold text-sm tracking-wide transition-all ${
+                p.highlight 
+                ? 'bg-orbitAccent hover:bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] active:scale-95' 
+                : 'bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 active:scale-95'
+              }`}>
+                {p.highlight ? 'Start 14-Day Free Trial' : 'Get Started Now'}
               </button>
             </motion.div>
           ))}
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="text-center mt-12"
+        >
+          <div className="inline-flex items-center gap-2 text-sm text-gray-500 bg-[#111622]/50 px-4 py-2 rounded-full border border-white/5 shadow-inner">
+            <Shield size={14} className="text-gray-400" />
+            Secure payment processing via Stripe. Cancel anytime.
+          </div>
         </motion.div>
       </div>
     </section>
