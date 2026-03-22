@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
 import { Check, Zap, Star, Shield } from 'lucide-react';
+import { useState } from 'react';
 
 const Pricing = () => {
+  const [isAnnual, setIsAnnual] = useState(false);
+
   const plans = [
     {
       name: "Starter",
-      price: "$29",
+      price: isAnnual ? "19" : "29",
       desc: "Perfect for small teams and startups",
       features: [
         "Up to 5 team members",
@@ -18,7 +21,7 @@ const Pricing = () => {
     },
     {
       name: "Pro",
-      price: "$99",
+      price: isAnnual ? "79" : "99",
       desc: "For growing businesses that need more",
       features: [
         "Unlimited team members",
@@ -49,7 +52,7 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 px-6 relative bg-orbitDark overflow-hidden">
+    <section id="pricing" className="py-24 px-6 relative bg-orbitDark overflow-hidden border-t border-white/5">
       {/* Background Glows */}
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
@@ -59,7 +62,7 @@ const Pricing = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-6 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
             <Star size={12} className="text-purple-400" />
@@ -68,9 +71,29 @@ const Pricing = () => {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">
             Simple, Transparent <span className="bg-gradient-to-r from-purple-400 to-orbitAccent bg-clip-text text-transparent">Pricing</span>
           </h2>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
             Choose the perfect plan for your scale. Start for free, upgrade when you need to.
           </p>
+
+          {/* Pricing Toggle */}
+          <div className="flex items-center justify-center gap-4">
+            <span className={`text-sm font-bold transition-colors ${!isAnnual ? 'text-white' : 'text-gray-500'}`}>Monthly</span>
+            <button 
+              onClick={() => setIsAnnual(!isAnnual)}
+              className="relative w-14 h-7 rounded-full bg-white/10 border border-white/10 p-1 flex items-center transition-all cursor-pointer hover:border-orbitAccent/50"
+            >
+              <div className="absolute inset-0 bg-orbitAccent/20 rounded-full blur-md opacity-0 hover:opacity-100 transition-opacity"></div>
+              <motion.div 
+                className="w-5 h-5 rounded-full bg-orbitAccent shadow-lg z-10"
+                animate={{ x: isAnnual ? 28 : 0 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            </button>
+            <div className="flex items-center gap-2">
+              <span className={`text-sm font-bold transition-colors ${isAnnual ? 'text-white' : 'text-gray-500'}`}>Annually</span>
+              <span className="bg-green-500/10 text-green-400 text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-md border border-green-500/20 animate-pulse">Save 20%</span>
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
@@ -106,6 +129,7 @@ const Pricing = () => {
               
               <div className="mb-8 pb-8 border-b border-white/10 relative">
                 <div className="flex items-baseline gap-1">
+                  {p.price !== 'Custom' && <span className={`text-2xl font-bold mr-0.5 ${p.highlight ? 'text-white/60' : 'text-gray-500'}`}>$</span>}
                   <span className={`text-5xl font-black ${p.highlight ? 'text-white' : 'text-gray-200'}`}>{p.price}</span>
                   {p.price !== 'Custom' && <span className="text-gray-500 font-medium tracking-wide">/ mo</span>}
                 </div>

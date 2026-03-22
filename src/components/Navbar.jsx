@@ -49,11 +49,11 @@ const Navbar = () => {
         {/* CTA */}
         <div className="hidden md:block">
           <a 
-            href="#pricing"
+            href="#waitlist"
             className="group relative bg-white/5 hover:bg-orbitAccent text-white px-6 py-2.5 rounded-xl font-bold text-sm tracking-wide flex items-center gap-2 border border-white/10 hover:border-orbitAccent transition-all shadow-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
           >
             <Zap size={16} className="text-orbitAccent group-hover:text-white transition-colors animate-pulse" /> 
-            Start Free
+            Join Waitlist
           </a>
         </div>
 
@@ -79,8 +79,8 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <a href="#pricing" onClick={() => setIsOpen(false)} className="bg-gradient-to-r from-orbitAccent to-blue-500 text-white px-6 py-4 rounded-xl font-bold text-center mt-4 shadow-lg shadow-orbitAccent/20 flex items-center justify-center gap-2">
-             <Zap size={18} /> Start Free Trial
+          <a href="#waitlist" onClick={() => setIsOpen(false)} className="bg-gradient-to-r from-orbitAccent to-blue-500 text-white px-6 py-4 rounded-xl font-bold text-center mt-4 shadow-lg shadow-orbitAccent/20 flex items-center justify-center gap-2">
+             <Zap size={18} /> Join Waitlist
           </a>
         </div>
       )}

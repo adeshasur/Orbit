@@ -91,19 +91,26 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative lg:ml-auto w-full max-w-[600px]"
           >
-            {/* Soft backdrop for the image */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-orbitAccent/30 via-purple-500/30 to-blue-500/30 rounded-[2.5rem] blur-xl opacity-50 block" />
-            
             {/* Main Image Container */}
-            <div className="relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#0d121f] shadow-2xl p-2 group">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"></div>
+            <div className="relative group">
+              {/* Soft backdrop for the image */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-orbitAccent/30 via-purple-500/30 to-blue-500/30 rounded-[2.5rem] blur-xl opacity-50 block" />
               
-              <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
-                alt="Orbit Dashboard Platform" 
-                className="w-full h-auto rounded-[1.5rem] object-cover transition-transform duration-700 group-hover:scale-[1.02] opacity-90"
-              />
-              
+              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#0d121f] shadow-2xl p-2 z-20">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"></div>
+                
+                <div className="rounded-[1.5rem] overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" 
+                    alt="Orbit Professional Team Analytics" 
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02] opacity-90 shadow-2xl"
+                  />
+                </div>
+                
+                {/* Inner subtle gradient overlay to blend image */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent opacity-40 z-10 pointer-events-none rounded-[1.5rem]"></div>
+              </div>
+
               {/* Floating UI Elements over image */}
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
@@ -114,7 +121,7 @@ const Hero = () => {
                   <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse shadow-[0_0_15px_rgba(74,222,128,0.8)]" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">System Health</div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">AI Agent Active</div>
                   <div className="text-xl font-bold text-white flex items-center gap-2">
                     Online <span className="text-sm text-green-400 font-medium bg-green-400/10 px-2 py-0.5 rounded-md">99.9%</span>
                   </div>
@@ -134,33 +141,54 @@ const Hero = () => {
                 </div>
                 <div className="text-2xl font-black text-orbitAccent">12,480+</div>
               </motion.div>
-              
-              {/* Inner subtle gradient overlay to blend image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent opacity-40 z-10 pointer-events-none rounded-[1.5rem]"></div>
             </div>
           </motion.div>
         </div>
 
-        {/* Brand Logos */}
+        {/* Brand Logos Marquee */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-32 pt-10 border-t border-white/5 flex flex-col items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-32 pt-10 border-t border-white/5 overflow-hidden group"
         >
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-8 text-center">Powering modern teams at</p>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 md:gap-x-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            {['Stripe', 'Notion', 'Slack', 'Linear', 'Loom'].map((brand) => (
-               <div key={brand} className="text-xl md:text-2xl font-black text-white hover:text-orbitAccent transition-colors cursor-default">
-                 {brand}
-               </div>
-            ))}
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 mb-10 text-center">Powering modern teams at</p>
+          
+          <div className="relative flex overflow-x-hidden">
+            <div className="flex animate-marquee whitespace-nowrap gap-20 items-center py-4">
+              {['Stripe', 'Notion', 'Slack', 'Linear', 'Loom', 'Figma', 'Vercel', 'PostHog'].map((brand) => (
+                <span key={brand} className="text-2xl md:text-3xl font-black text-white/20 hover:text-orbitAccent transition-colors cursor-default select-none">
+                  {brand}
+                </span>
+              ))}
+            </div>
+            <div className="flex absolute top-0 animate-marquee2 whitespace-nowrap gap-20 items-center py-4 ml-[calc(100%+80px)]">
+              {['Stripe', 'Notion', 'Slack', 'Linear', 'Loom', 'Figma', 'Vercel', 'PostHog'].map((brand) => (
+                <span key={brand + '2'} className="text-2xl md:text-3xl font-black text-white/20 hover:text-orbitAccent transition-colors cursor-default select-none">
+                  {brand}
+                </span>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
       
       {/* Bottom fade out */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-orbitDark to-transparent pointer-events-none z-20" />
+      
+      {/* Custom Styles for Marquee */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .animate-marquee2 {
+          animation: marquee 30s linear infinite;
+        }
+      `}</style>
     </section>
   );
 };
